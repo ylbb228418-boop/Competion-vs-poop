@@ -1,6 +1,17 @@
 const http = require('node:http');
 const fs = require('node:fs');
 const path = require('node:path');
+
+function loadLocalEnv() {
+  if (process.env.OPENAI_API_KEY) return;
+  const envPath = path.join(__dirname, '.env');
+  if (!fs.existsSync(envPath)) return;
+  const envText = fs.readFileSync(envPath, 'utf8');
+  const line = envText.split(/\r?\n/).find((item) => item.startsWith('OPENAI_API_KEY='));
+  if (line) process.env.OPENAI_API_KEY = line.slice('OPENAI_API_KEY='.length).trim();
+}
+
+loadLocalEnv();
 const { askOpenAI } = require('./ask-openai');
 
 const publicDir = path.join(__dirname, 'public');

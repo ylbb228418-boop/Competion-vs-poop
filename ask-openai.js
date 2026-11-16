@@ -1,9 +1,5 @@
-const fs = require('node:fs');
-
 function readApiKey() {
-  const envText = fs.readFileSync('.env', 'utf8');
-  const line = envText.split(/\r?\n/).find((item) => item.startsWith('OPENAI_API_KEY='));
-  return line ? line.slice('OPENAI_API_KEY='.length).trim() : '';
+  return String(process.env.OPENAI_API_KEY || '').trim();
 }
 
 async function askOpenAI(report) {
@@ -12,7 +8,9 @@ async function askOpenAI(report) {
     throw new Error('OPENAI_KEY_MISSING');
   }
 
-  const instructions = fs.readFileSync('BRIEF.md', 'utf8');
+  const fs = require('node:fs');
+  const path = require('node:path');
+  const instructions = fs.readFileSync(path.join(__dirname, 'BRIEF.md'), 'utf8');
   const response = await fetch('https://api.openai.com/v1/responses', {
     method: 'POST',
     headers: {

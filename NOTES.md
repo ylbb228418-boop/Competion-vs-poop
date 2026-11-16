@@ -12,6 +12,14 @@ node server.js
 
 Then open http://localhost:3000 in a browser.
 
+## How it goes online with Vercel
+
+- Vercel serves the existing `public` page through `vercel.json` rewrites.
+- Vercel runs `api/analyze.mjs` as the `/api/analyze` serverless function.
+- Add one Vercel Environment Variable named `OPENAI_API_KEY` for the Production, Preview, and Development environments you use. No other Vercel setting is required.
+- The AI helper reads only `process.env.OPENAI_API_KEY` online. The local server loads the ignored `.env` file only when running on this computer.
+- Browser notes still use localStorage, so saved reports stay in the browser for now.
+
 ## Done
 
 - Version 1 is built: a student can enter what happened, duration, frequency, and location, then press Check.
