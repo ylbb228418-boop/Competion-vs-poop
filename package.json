@@ -1,0 +1,9 @@
+{
+  "name": "anti-bullies",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A small safety-first bullying pattern checker for the Presidential SI Challenge.",
+  "scripts": {
+    "start": "node server.js"
+  }
+}

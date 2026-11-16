@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Anti-bullies · Notice the pattern</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <div class="hero-top"><p class="eyebrow"><span class="brand-subtitle">A KIND STORY</span></p><span class="hero-bubble">Every story matters</span></div>
+      <svg class="flying-bee" viewBox="0 0 190 100" aria-hidden="true" role="presentation">
+        <path class="bee-trail" d="M7 70 C34 40, 56 82, 88 57" />
+        <circle class="trail-dot" cx="27" cy="53" r="3" /><circle class="trail-dot" cx="52" cy="66" r="3" />
+        <g transform="rotate(-7 136 51)">
+          <path class="bee-antenna" d="M125 31 Q119 17 108 20 M138 30 Q144 17 155 21" />
+          <ellipse class="bee-wing" cx="123" cy="38" rx="18" ry="12" transform="rotate(-25 123 38)" />
+          <ellipse class="bee-wing" cx="143" cy="38" rx="18" ry="12" transform="rotate(22 143 38)" />
+          <rect class="bee-body" x="109" y="36" width="55" height="30" rx="15" />
+          <path class="bee-stripe" d="M126 38 V64 M143 38 V64" />
+          <circle class="bee-eye" cx="153" cy="49" r="2.8" />
+          <path class="bee-smile" d="M156 56 Q161 60 165 55" />
+          <path class="bee-stinger" d="M109 51 L97 45 L102 57 Z" />
+        </g>
+      </svg>
+      <h1><span class="title-main">ANTI-BULLIES</span><br><span class="title-sub">Find the pattern. Find support.</span></h1>
+      <p class="intro">This is a gentle place to tell what happened. We’ll help you look at the story’s clues—how long it has been happening and how often—and find a grown-up who can help.</p>
+      <div class="safety-banner"><strong>Need help right now?</strong> Find a safe grown-up nearby. If someone could get hurt, call 911. This helper is not an emergency service.</div>
+    </header>
+
+    <section class="panel check-panel" aria-labelledby="check-title">
+      <div class="section-label">CHAPTER ONE · TELL YOUR STORY</div>
+      <h2 id="check-title">What’s been going on?</h2>
+      <p class="muted">You can use pretend details for a demo. Don’t add full names, addresses, or passwords.</p>
+      <p class="choice-intro">Choose the clues that fit your story.</p>
+      <form id="check-form">
+        <div class="field-grid">
+          <fieldset class="choice-card choice-blue"><legend>How long has it happened?</legend><input type="hidden" name="duration" value="Today only"><div class="choice-options" role="radiogroup" aria-label="How long has it happened?"><button class="choice-option selected" type="button" data-choice="duration" data-value="Today only" aria-pressed="true">Today only</button><button class="choice-option" type="button" data-choice="duration" data-value="A few days" aria-pressed="false">A few days</button><button class="choice-option" type="button" data-choice="duration" data-value="About 2 weeks" aria-pressed="false">About 2 weeks</button><button class="choice-option" type="button" data-choice="duration" data-value="More than a month" aria-pressed="false">More than a month</button></div></fieldset>
+          <fieldset class="choice-card choice-pink"><legend>How often?</legend><input type="hidden" name="frequency" value="Once"><div class="choice-options" role="radiogroup" aria-label="How often?"><button class="choice-option selected" type="button" data-choice="frequency" data-value="Once" aria-pressed="true">Once</button><button class="choice-option" type="button" data-choice="frequency" data-value="A few times" aria-pressed="false">A few times</button><button class="choice-option" type="button" data-choice="frequency" data-value="Almost every day" aria-pressed="false">Almost every day</button><button class="choice-option" type="button" data-choice="frequency" data-value="Many times a day" aria-pressed="false">Many times a day</button></div></fieldset>
+        </div>
+        <fieldset class="choice-card choice-green"><legend>Where does it happen?</legend><input type="hidden" name="location" value="In class"><div class="choice-options" role="radiogroup" aria-label="Where does it happen?"><button class="choice-option selected" type="button" data-choice="location" data-value="In class" aria-pressed="true">In class</button><button class="choice-option" type="button" data-choice="location" data-value="Between classes" aria-pressed="false">Between classes</button><button class="choice-option" type="button" data-choice="location" data-value="On the bus" aria-pressed="false">On the bus</button><button class="choice-option" type="button" data-choice="location" data-value="Online" aria-pressed="false">Online</button><button class="choice-option" type="button" data-choice="location" data-value="Somewhere else" aria-pressed="false">Somewhere else</button></div></fieldset>
+        <fieldset class="choice-card choice-yellow"><legend>What kind of behavior is it?</legend><input type="hidden" name="type" value="Not sure"><div class="choice-options" role="radiogroup" aria-label="What kind of behavior is it?"><button class="choice-option" type="button" data-choice="type" data-value="Mean words or teasing" aria-pressed="false">Mean words or teasing</button><button class="choice-option" type="button" data-choice="type" data-value="Leaving out or rumors" aria-pressed="false">Leaving out or rumors</button><button class="choice-option" type="button" data-choice="type" data-value="Physical or belongings" aria-pressed="false">Physical or belongings</button><button class="choice-option" type="button" data-choice="type" data-value="Online messages" aria-pressed="false">Online messages</button><button class="choice-option selected" type="button" data-choice="type" data-value="Not sure" aria-pressed="true">Not sure</button></div></fieldset>
+        <label>What happened?<textarea name="details" rows="5" placeholder="Example: The same people keep making comments about me. They stop when I get upset, then start again the next day."></textarea></label>
+        <button id="check-button" type="submit">Turn the page</button>
+        <p id="status" class="status" role="status"></p>
+      </form>
+    </section>
+
+    <section id="result" class="panel result hidden" aria-live="polite"></section>
+
+    <section class="panel difference">
+      <div class="section-label">A CLUE TO NOTICE</div>
+      <div class="difference-grid"><div><strong>One time</strong><p>Can feel confusing.</p></div><div class="arrow">→</div><div><strong>Many times</strong><p>That can be a pattern worth sharing with a trusted adult.</p></div></div>
+      <p class="small-note">A pattern is a clue, not proof. You and a trusted adult can decide what to do next.</p>
+    </section>
+
+    <section class="panel history-panel">
+      <div class="history-heading"><div><div class="section-label">CHAPTER TWO · YOUR NOTES</div><h2>Your check-ins</h2></div><button id="clear-history" class="quiet-button" type="button">Clear notes</button></div>
+      <p class="muted">Saved on this computer only for now. The sample stories are made up, and you can clear them whenever you want.</p>
+      <div id="history"></div>
+    </section>
+
+    <footer><span>A story about safety and kindness.</span><span>A trusted adult can help with the next chapter.</span></footer>
+  </main>
+  <script src="/storage.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>
