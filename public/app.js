@@ -80,7 +80,21 @@ form.addEventListener('submit', async (event) => {
       throw new Error(message || 'The AI could not answer.');
     }
     const signal = patternSignal(duration, frequency);
-    result.innerHTML = `<h2>What may be happening</h2><p>${data.answer.replaceAll('\n', '<br>')}</p><div class="signal-meter"><div class="meter-heading"><strong>Repeated-pattern signal</strong><span>${signal.label}</span></div><div class="meter-track" role="progressbar" aria-label="Repeated-pattern signal" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${signal.score}"><div class="meter-fill" style="width:${signal.score}%"></div></div><div class="meter-labels"><span>Probably not</span><span>Yes, very possible</span></div><p class="meter-note">This is a clue based on how long and how often it happened—not proof. A trusted adult can help you decide what to do.</p></div><div class="next-step">Next step: save this screen and talk to a trusted adult.</div>`;
+    result.innerHTML = `<h2>What may be happening</h2><p>${data.answer.replaceAll('\n', '<br>')}</p><div class="signal-meter"><div class="meter-sticker">A gentle clue</div><div class="meter-heading"><strong>Could this be a pattern?</strong><span>${signal.label}</span></div><div class="meter-track" role="progressbar" aria-label="Repeated-pattern signal" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${signal.score}"><div class="meter-fill" style="width:0%"></div></div><div class="meter-labels"><span>Probably not</span><span>Yes, very possible</span></div><p class="meter-note">This is a clue based on how long and how often it happened—not proof. A trusted adult can help you decide what to do.</p></div><div class="next-step">Next step: save this screen and talk to a trusted adult.</div>`;
+    const meter = result.querySelector('.signal-meter');
+    const fill = result.querySelector('.meter-fill');
+    const revealMeter = () => { fill.style.width = `${signal.score}%`; };
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          revealMeter();
+          observer.disconnect();
+        }
+      }, { threshold: 0.35 });
+      observer.observe(meter);
+    } else {
+      revealMeter();
+    }
     result.className = 'result';
     window.reportStorage.saveReport({ id: crypto.randomUUID(), createdAt: new Date().toISOString(), duration, frequency, location, type, details, answer: data.answer });
     showHistory();
