@@ -5,7 +5,7 @@
   ],
   "functions": {
     "api/analyze.mjs": {
-      "includeFiles": ["BRIEF.md"]
+      "includeFiles": "BRIEF.md"
     }
   }
 }
