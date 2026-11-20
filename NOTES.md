@@ -33,6 +33,7 @@ Then open http://localhost:3000 in a browser.
 - The app gives safety guidance and tells users to involve a trusted adult.
 - The screen now uses a children’s storybook style with chapter labels, story language, no emojis, and a colorful illustrated background while keeping the safety rules.
 - The small choice area now uses pastel storybook cards and friendlier selection controls.
+- Added a repeated-pattern signal meter from “Probably not” to “Yes, very possible,” clearly marked as a clue rather than proof.
 - Duration, frequency, and location are now colorful clickable choice buttons that visibly show the selected answer.
 - Choice cards now use soft paper-like colors, hand-drawn shapes, rounded buttons, and a warm selected state for a more storybook feel.
 - The AI error message now clearly explains that a trusted adult should check the local key or internet connection.

@@ -33,6 +33,24 @@ function setBusy(busy) {
   status.textContent = busy ? 'The AI is reading your report. Please wait.' : '';
 }
 
+function patternSignal(duration, frequency) {
+  const durationScore = {
+    'Today only': 15,
+    'A few days': 35,
+    'About 2 weeks': 65,
+    'More than a month': 85
+  }[duration] || 0;
+  const frequencyScore = {
+    Once: 10,
+    'A few times': 35,
+    'Almost every day': 70,
+    'Many times a day': 90
+  }[frequency] || 0;
+  const score = Math.round((durationScore + frequencyScore) / 2);
+  const label = score < 25 ? 'Probably not' : score < 50 ? 'Maybe' : score < 75 ? 'Possibly' : 'Yes, very possible';
+  return { score, label };
+}
+
 form.addEventListener('submit', async (event) => {
   event.preventDefault();
   const formData = new FormData(form);
@@ -61,7 +79,8 @@ form.addEventListener('submit', async (event) => {
       const message = typeof data.error === 'string' ? data.error : data.error?.message;
       throw new Error(message || 'The AI could not answer.');
     }
-    result.innerHTML = `<h2>What may be happening</h2><p>${data.answer.replaceAll('\n', '<br>')}</p><div class="next-step">Next step: save this screen and talk to a trusted adult.</div>`;
+    const signal = patternSignal(duration, frequency);
+    result.innerHTML = `<h2>What may be happening</h2><p>${data.answer.replaceAll('\n', '<br>')}</p><div class="signal-meter"><div class="meter-heading"><strong>Repeated-pattern signal</strong><span>${signal.label}</span></div><div class="meter-track" role="progressbar" aria-label="Repeated-pattern signal" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${signal.score}"><div class="meter-fill" style="width:${signal.score}%"></div></div><div class="meter-labels"><span>Probably not</span><span>Yes, very possible</span></div><p class="meter-note">This is a clue based on how long and how often it happened—not proof. A trusted adult can help you decide what to do.</p></div><div class="next-step">Next step: save this screen and talk to a trusted adult.</div>`;
     result.className = 'result';
     window.reportStorage.saveReport({ id: crypto.randomUUID(), createdAt: new Date().toISOString(), duration, frequency, location, type, details, answer: data.answer });
     showHistory();
