@@ -3,12 +3,14 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 function loadLocalEnv() {
-  if (process.env.OPENAI_API_KEY) return;
   const envPath = path.join(__dirname, '.env');
   if (!fs.existsSync(envPath)) return;
   const envText = fs.readFileSync(envPath, 'utf8');
-  const line = envText.split(/\r?\n/).find((item) => item.startsWith('OPENAI_API_KEY='));
-  if (line) process.env.OPENAI_API_KEY = line.slice('OPENAI_API_KEY='.length).trim();
+  for (const name of ['KEYGEN_URL', 'KEYGEN_TOKEN']) {
+    if (process.env[name]) continue;
+    const line = envText.split(/\r?\n/).find((item) => item.startsWith(`${name}=`));
+    if (line) process.env[name] = line.slice(name.length + 1).trim();
+  }
 }
 
 loadLocalEnv();
@@ -20,6 +22,13 @@ const port = 3000;
 function sendJson(res, status, body) {
   res.writeHead(status, { 'Content-Type': 'application/json; charset=utf-8' });
   res.end(JSON.stringify(body));
+}
+
+function sendError(res, error) {
+  const message = error.message || 'I could not finish that check.';
+  const fix = error.fix || 'Check the server logs and configuration.';
+  console.error(`[Anti-bullies] ${fix}`);
+  sendJson(res, 502, { error: { message, fix } });
 }
 
 function serveFile(req, res) {
@@ -47,10 +56,7 @@ const server = http.createServer((req, res) => {
         const answer = await askOpenAI(report.slice(0, 10000));
         sendJson(res, 200, { answer });
       } catch (error) {
-        const message = error.message === 'OPENAI_KEY_MISSING' || error.message === 'OPENAI_REQUEST_FAILED'
-          ? 'I could not connect to the AI. Please ask a trusted adult to check the OpenAI key and internet connection.'
-          : 'I could not finish that check. Please try again or tell a trusted adult.';
-        sendJson(res, 502, { error: message });
+        sendError(res, error);
       }
     });
     return;

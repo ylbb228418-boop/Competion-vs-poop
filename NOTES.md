@@ -16,14 +16,15 @@ Then open http://localhost:3000 in a browser.
 
 - Vercel serves the existing `public` page through `vercel.json` rewrites.
 - Vercel runs `api/analyze.mjs` as the `/api/analyze` serverless function.
-- Add one Vercel Environment Variable named `OPENAI_API_KEY` for the Production, Preview, and Development environments you use. No other Vercel setting is required.
-- The AI helper reads only `process.env.OPENAI_API_KEY` online. The local server loads the ignored `.env` file only when running on this computer.
+- Add Vercel Environment Variables named `KEYGEN_URL` and `KEYGEN_TOKEN` for the Production, Preview, and Development environments you use. No OpenAI key is placed in this project.
+- The server gets the AI key from `getKey()` in `keygen.js`. `getKey()` calls `KEYGEN_URL/api/lookup-key`, caches the returned key until `expiresAt`, and refreshes once when OpenAI reports an invalid key.
+- The local server loads the ignored `.env` file only when running on this computer. The keygen token and returned AI key never go to the page.
 - Browser notes still use localStorage, so saved reports stay in the browser for now.
 
 ## Done
 
 - Version 1 is built: a student can enter what happened, duration, frequency, and location, then press Check.
-- The server reads the OpenAI key from `.env` and keeps it away from the browser.
+- The server gets a temporary OpenAI key from MindDo through `getKey()` and keeps it away from the browser.
 - The server sends `BRIEF.md` as the AI instructions for every check.
 - The OpenAI model is `gpt-5.6-luna`.
 - The Check button shows “Thinking…” and cannot be pressed twice while waiting.

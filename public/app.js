@@ -57,7 +57,10 @@ form.addEventListener('submit', async (event) => {
       body: JSON.stringify({ report })
     });
     const data = await response.json();
-    if (!response.ok) throw new Error(data.error || 'The AI could not answer.');
+    if (!response.ok) {
+      const message = typeof data.error === 'string' ? data.error : data.error?.message;
+      throw new Error(message || 'The AI could not answer.');
+    }
     result.innerHTML = `<h2>What may be happening</h2><p>${data.answer.replaceAll('\n', '<br>')}</p><div class="next-step">Next step: save this screen and talk to a trusted adult.</div>`;
     result.className = 'result';
     window.reportStorage.saveReport({ id: crypto.randomUUID(), createdAt: new Date().toISOString(), duration, frequency, location, type, details, answer: data.answer });
