@@ -34,6 +34,7 @@ Then open http://localhost:3000 in a browser.
 - The screen now uses a children’s storybook style with chapter labels, story language, no emojis, and a colorful illustrated background while keeping the safety rules.
 - The small choice area now uses pastel storybook cards and friendlier selection controls.
 - Added a repeated-pattern signal meter from “Probably not” to “Yes, very possible,” clearly marked as a clue rather than proof.
+- Verified the MVP end to end: a made-up report reaches the server, gets an AI summary, shows the result and signal meter, and remains saved in browser localStorage.
 - Duration, frequency, and location are now colorful clickable choice buttons that visibly show the selected answer.
 - Choice cards now use soft paper-like colors, hand-drawn shapes, rounded buttons, and a warm selected state for a more storybook feel.
 - The AI error message now clearly explains that a trusted adult should check the local key or internet connection.
