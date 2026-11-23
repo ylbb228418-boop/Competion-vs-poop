@@ -32,6 +32,12 @@ h1 span { color:var(--purple); }
 h2 { font-size:25px; }
 .intro { max-width:650px; color:var(--muted); font-size:17px; line-height:1.55; }
 .safety-banner { background:#fff1d4; border:2px solid #e9c38b; padding:14px 16px; border-radius:19px; margin-top:20px; font-size:14px; line-height:1.5; }
+.danger-button { margin-top:12px; background:#e87972; box-shadow:0 5px 0 #bd5a55; }
+.danger-button:hover { box-shadow:0 7px 0 #bd5a55; }
+.danger-help { display:grid; gap:12px; margin-top:12px; padding:18px; border:3px solid #f2b0a9; border-radius:23px 18px 25px 19px; background:#fff0ed; box-shadow:0 6px 0 rgba(189,90,85,.16); color:#663b3b; }
+.danger-help p { margin:5px 0 0; line-height:1.45; }
+.danger-help ol { margin:0; padding-left:23px; line-height:1.7; }
+.danger-help .quiet-button { justify-self:start; color:#a44a45; border-color:#e2aaa3; }
 .panel { background:rgba(255,251,242,.97); border:3px solid #fffdf7; border-radius:31px 27px 35px 25px; padding:28px; margin:16px 0; box-shadow:0 12px 30px rgba(151,102,79,.12); }
 .muted,.small-note { color:var(--muted); font-size:14px; line-height:1.5; }
 .choice-intro { margin:22px 0 -4px; color:var(--purple); font-family:'Nunito',sans-serif; font-weight:800; font-size:16px; }

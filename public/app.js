@@ -4,10 +4,24 @@ const status = document.querySelector('#status');
 const result = document.querySelector('#result');
 const history = document.querySelector('#history');
 const incidentDateInput = form.querySelector('[name="incidentDate"]');
+const dangerButton = document.querySelector('#danger-button');
+const dangerHelp = document.querySelector('#danger-help');
 
 const today = new Date();
 today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
 incidentDateInput.value = today.toISOString().slice(0, 10);
+
+dangerButton.addEventListener('click', () => {
+  const open = dangerButton.getAttribute('aria-expanded') === 'true';
+  dangerButton.setAttribute('aria-expanded', String(!open));
+  dangerHelp.classList.toggle('hidden', open);
+});
+
+document.querySelector('#hide-danger').addEventListener('click', () => {
+  dangerButton.setAttribute('aria-expanded', 'false');
+  dangerHelp.classList.add('hidden');
+  dangerButton.focus();
+});
 
 document.querySelectorAll('.choice-option').forEach((option) => {
   option.addEventListener('click', () => {
