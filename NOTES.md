@@ -39,6 +39,7 @@ Then open http://localhost:3000 in a browser.
 - The signal meter now uses one solid color at a time: green for lower signals, yellow in the middle, and red only for the highest signal.
 - Verified the MVP end to end: a made-up report reaches the server, gets an AI summary, shows the result and signal meter, and remains saved in browser localStorage.
 - Incident logging now lets the user choose a date, sends that date with the AI report, and shows it in Saved patterns.
+- Warmed the incident date card so it matches the other cozy storybook choice cards.
 - Duration, frequency, and location are now colorful clickable choice buttons that visibly show the selected answer.
 - Choice cards now use soft paper-like colors, hand-drawn shapes, rounded buttons, and a warm selected state for a more storybook feel.
 - The AI error message now clearly explains that a trusted adult should check the local key or internet connection.
