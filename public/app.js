@@ -54,7 +54,8 @@ function patternSignal(duration, frequency) {
   }[frequency] || 0;
   const score = Math.round((durationScore + frequencyScore) / 2);
   const label = score < 25 ? 'Probably not' : score < 50 ? 'Maybe' : score < 75 ? 'Possibly' : 'Yes, very possible';
-  return { score, label };
+  const tone = score < 50 ? 'green' : score < 75 ? 'yellow' : 'red';
+  return { score, label, tone };
 }
 
 form.addEventListener('submit', async (event) => {
@@ -91,7 +92,7 @@ form.addEventListener('submit', async (event) => {
       throw new Error(message || 'The AI could not answer.');
     }
     const signal = patternSignal(duration, frequency);
-    result.innerHTML = `<h2>What may be happening</h2><p>${data.answer.replaceAll('\n', '<br>')}</p><div class="signal-meter"><div class="meter-sticker">A gentle clue</div><div class="meter-heading"><strong>Could this be a pattern?</strong><span>${signal.label}</span></div><div class="meter-track" role="progressbar" aria-label="Repeated-pattern signal" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${signal.score}"><div class="meter-fill" style="width:0%"></div></div><div class="meter-labels"><span>Probably not</span><span>Yes, very possible</span></div><p class="meter-note">This is a clue based on how long and how often it happened—not proof. A trusted adult can help you decide what to do.</p></div><div class="next-step">Next step: save this screen and talk to a trusted adult.</div>`;
+    result.innerHTML = `<h2>What may be happening</h2><p>${data.answer.replaceAll('\n', '<br>')}</p><div class="signal-meter"><div class="meter-sticker">A gentle clue</div><div class="meter-heading"><strong>Could this be a pattern?</strong><span>${signal.label}</span></div><div class="meter-track" role="progressbar" aria-label="Repeated-pattern signal" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${signal.score}"><div class="meter-fill ${signal.tone}" style="width:0%"></div></div><div class="meter-labels"><span>Probably not</span><span>Yes, very possible</span></div><p class="meter-note">This is a clue based on how long and how often it happened—not proof. A trusted adult can help you decide what to do.</p></div><div class="next-step">Next step: save this screen and talk to a trusted adult.</div>`;
     const meter = result.querySelector('.signal-meter');
     const fill = result.querySelector('.meter-fill');
     const revealMeter = () => { fill.style.width = `${signal.score}%`; };

@@ -36,6 +36,7 @@ Then open http://localhost:3000 in a browser.
 - The small choice area now uses pastel storybook cards and friendlier selection controls.
 - Added a repeated-pattern signal meter from “Probably not” to “Yes, very possible,” clearly marked as a clue rather than proof.
 - Made the signal meter cuter with a gentle-clue sticker, softer storybook colors, and playful dot details.
+- The signal meter now uses one solid color at a time: green for lower signals, yellow in the middle, and red only for the highest signal.
 - Verified the MVP end to end: a made-up report reaches the server, gets an AI summary, shows the result and signal meter, and remains saved in browser localStorage.
 - Incident logging now lets the user choose a date, sends that date with the AI report, and shows it in Saved patterns.
 - Duration, frequency, and location are now colorful clickable choice buttons that visibly show the selected answer.
