@@ -26,7 +26,7 @@ document.querySelector('#hide-danger').addEventListener('click', () => {
 });
 
 emergencyNumber.addEventListener('click', () => {
-  sirenDemo.textContent = 'Sirens! Demo only — no real call was made.';
+  sirenDemo.textContent = 'Sirens! Demo only — repeating for 10 seconds. No real call was made.';
   emergencyNumber.classList.remove('siren-flash');
   void emergencyNumber.offsetWidth;
   emergencyNumber.classList.add('siren-flash');
@@ -40,16 +40,15 @@ function playDemoSiren() {
   const oscillator = audio.createOscillator();
   const gain = audio.createGain();
   oscillator.type = 'square';
-  oscillator.frequency.setValueAtTime(650, audio.currentTime);
-  oscillator.frequency.linearRampToValueAtTime(1050, audio.currentTime + 0.35);
-  oscillator.frequency.linearRampToValueAtTime(650, audio.currentTime + 0.7);
-  oscillator.frequency.linearRampToValueAtTime(1050, audio.currentTime + 1.05);
+  for (let time = 0; time < 10; time += 0.5) {
+    oscillator.frequency.setValueAtTime(time % 1 === 0 ? 650 : 1050, audio.currentTime + time);
+  }
   gain.gain.setValueAtTime(0.0001, audio.currentTime);
   gain.gain.exponentialRampToValueAtTime(0.08, audio.currentTime + 0.04);
-  gain.gain.exponentialRampToValueAtTime(0.0001, audio.currentTime + 1.2);
+  gain.gain.exponentialRampToValueAtTime(0.0001, audio.currentTime + 10);
   oscillator.connect(gain).connect(audio.destination);
   oscillator.start();
-  oscillator.stop(audio.currentTime + 1.25);
+  oscillator.stop(audio.currentTime + 10.05);
   oscillator.addEventListener('ended', () => audio.close());
 }
 
