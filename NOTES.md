@@ -27,6 +27,7 @@ Then open http://localhost:3000 in a browser.
 - The server gets a temporary OpenAI key from MindDo through `getKey()` and keeps it away from the browser.
 - The server sends `BRIEF.md` as the AI instructions for every check.
 - The OpenAI model is `gpt-5.6-luna`.
+- Models check: the available model containing “luna” is `gpt-5.6-luna`.
 - The Check button shows “Thinking…” and cannot be pressed twice while waiting.
 - Reports and two made-up sample items save in browser localStorage.
 - Saves on this computer only for now.
@@ -36,6 +37,7 @@ Then open http://localhost:3000 in a browser.
 - Added a repeated-pattern signal meter from “Probably not” to “Yes, very possible,” clearly marked as a clue rather than proof.
 - Made the signal meter cuter with a gentle-clue sticker, softer storybook colors, and playful dot details.
 - Verified the MVP end to end: a made-up report reaches the server, gets an AI summary, shows the result and signal meter, and remains saved in browser localStorage.
+- Incident logging now lets the user choose a date, sends that date with the AI report, and shows it in Saved patterns.
 - Duration, frequency, and location are now colorful clickable choice buttons that visibly show the selected answer.
 - Choice cards now use soft paper-like colors, hand-drawn shapes, rounded buttons, and a warm selected state for a more storybook feel.
 - The AI error message now clearly explains that a trusted adult should check the local key or internet connection.

@@ -3,6 +3,11 @@ const button = document.querySelector('#check-button');
 const status = document.querySelector('#status');
 const result = document.querySelector('#result');
 const history = document.querySelector('#history');
+const incidentDateInput = form.querySelector('[name="incidentDate"]');
+
+const today = new Date();
+today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
+incidentDateInput.value = today.toISOString().slice(0, 10);
 
 document.querySelectorAll('.choice-option').forEach((option) => {
   option.addEventListener('click', () => {
@@ -20,7 +25,8 @@ function showHistory() {
   const reports = window.reportStorage.getReports();
   history.innerHTML = reports.map((item) => `
     <article class="history-card">
-      <div><strong>${item.frequency}</strong><span>${item.duration}</span></div>
+      <div><strong>${item.incidentDate ? new Date(`${item.incidentDate}T00:00:00`).toLocaleDateString() : 'Date not recorded'}</strong><span>${item.frequency}</span></div>
+      <div><span>${item.duration}</span><span>${item.type || 'Pattern note'}</span></div>
       <p>${item.details}</p>
       <small>${item.location} · saved on this computer</small>
     </article>
@@ -62,9 +68,14 @@ form.addEventListener('submit', async (event) => {
 
   const duration = String(formData.get('duration'));
   const frequency = String(formData.get('frequency'));
+  const incidentDate = String(formData.get('incidentDate') || '');
   const location = String(formData.get('location'));
   const type = String(formData.get('type'));
-  const report = `How long: ${duration}\nHow often: ${frequency}\nWhere: ${location}\nPossible behavior type: ${type}\nWhat happened: ${details}`;
+  if (!incidentDate) {
+    status.textContent = 'Please choose the date first.';
+    return;
+  }
+  const report = `Date: ${incidentDate}\nHow long: ${duration}\nHow often: ${frequency}\nWhere: ${location}\nPossible behavior type: ${type}\nWhat happened: ${details}`;
   setBusy(true);
   result.className = 'result hidden';
 
@@ -96,7 +107,7 @@ form.addEventListener('submit', async (event) => {
       revealMeter();
     }
     result.className = 'result';
-    window.reportStorage.saveReport({ id: crypto.randomUUID(), createdAt: new Date().toISOString(), duration, frequency, location, type, details, answer: data.answer });
+    window.reportStorage.saveReport({ id: crypto.randomUUID(), createdAt: new Date().toISOString(), incidentDate, duration, frequency, location, type, details, answer: data.answer });
     showHistory();
   } catch (error) {
     result.innerHTML = `<h2>The helper needs a quick check</h2><p>${error.message || 'Ask a trusted adult to check the AI key and internet connection, then try again.'}</p>`;

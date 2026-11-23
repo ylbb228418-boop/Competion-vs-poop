@@ -4,6 +4,7 @@ const sampleReports = [
   {
     id: 'sample-1',
     createdAt: '2026-10-20T15:30:00.000Z',
+    incidentDate: '2026-10-20',
     duration: 'About 2 weeks',
     frequency: 'Almost every day',
     location: 'Between classes',
@@ -13,6 +14,7 @@ const sampleReports = [
   {
     id: 'sample-2',
     createdAt: '2026-10-22T16:10:00.000Z',
+    incidentDate: '2026-10-22',
     duration: 'A few days',
     frequency: 'A few times',
     location: 'Online',
