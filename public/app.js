@@ -30,7 +30,28 @@ emergencyNumber.addEventListener('click', () => {
   emergencyNumber.classList.remove('siren-flash');
   void emergencyNumber.offsetWidth;
   emergencyNumber.classList.add('siren-flash');
+  playDemoSiren();
 });
+
+function playDemoSiren() {
+  const AudioContext = window.AudioContext || window.webkitAudioContext;
+  if (!AudioContext) return;
+  const audio = new AudioContext();
+  const oscillator = audio.createOscillator();
+  const gain = audio.createGain();
+  oscillator.type = 'square';
+  oscillator.frequency.setValueAtTime(650, audio.currentTime);
+  oscillator.frequency.linearRampToValueAtTime(1050, audio.currentTime + 0.35);
+  oscillator.frequency.linearRampToValueAtTime(650, audio.currentTime + 0.7);
+  oscillator.frequency.linearRampToValueAtTime(1050, audio.currentTime + 1.05);
+  gain.gain.setValueAtTime(0.0001, audio.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.08, audio.currentTime + 0.04);
+  gain.gain.exponentialRampToValueAtTime(0.0001, audio.currentTime + 1.2);
+  oscillator.connect(gain).connect(audio.destination);
+  oscillator.start();
+  oscillator.stop(audio.currentTime + 1.25);
+  oscillator.addEventListener('ended', () => audio.close());
+}
 
 document.querySelectorAll('.choice-option').forEach((option) => {
   option.addEventListener('click', () => {
