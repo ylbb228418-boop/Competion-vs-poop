@@ -6,6 +6,8 @@ const history = document.querySelector('#history');
 const incidentDateInput = form.querySelector('[name="incidentDate"]');
 const dangerButton = document.querySelector('#danger-button');
 const dangerHelp = document.querySelector('#danger-help');
+const emergencyNumber = document.querySelector('.emergency-number');
+const sirenDemo = document.querySelector('#siren-demo');
 
 const today = new Date();
 today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
@@ -21,6 +23,13 @@ document.querySelector('#hide-danger').addEventListener('click', () => {
   dangerButton.setAttribute('aria-expanded', 'false');
   dangerHelp.classList.add('hidden');
   dangerButton.focus();
+});
+
+emergencyNumber.addEventListener('click', () => {
+  sirenDemo.textContent = 'Sirens! Demo only — no real call was made.';
+  emergencyNumber.classList.remove('siren-flash');
+  void emergencyNumber.offsetWidth;
+  emergencyNumber.classList.add('siren-flash');
 });
 
 document.querySelectorAll('.choice-option').forEach((option) => {

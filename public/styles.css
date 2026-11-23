@@ -39,6 +39,9 @@ h2 { font-size:25px; }
 .danger-help ol { margin:0; padding-left:23px; line-height:1.7; }
 .emergency-number { justify-self:start; min-width:108px; padding:10px 22px; font-size:23px; letter-spacing:.06em; background:#e87972; box-shadow:0 5px 0 #bd5a55; cursor:default; }
 .emergency-number:hover { transform:none; box-shadow:0 5px 0 #bd5a55; }
+.siren-flash { animation:siren-flash .65s ease-in-out 2; }
+@keyframes siren-flash { 0%,100% { background:#e87972; } 50% { background:#fff; color:#bd5a55; transform:scale(1.06) rotate(-2deg); } }
+.siren-demo { min-height:18px; margin:0; color:#a44a45; font-size:13px; font-weight:800; }
 .demo-note { color:#8f5752; font-size:11px; font-weight:700; }
 .danger-help .quiet-button { justify-self:start; color:#a44a45; border-color:#e2aaa3; }
 .panel { background:rgba(255,251,242,.97); border:3px solid #fffdf7; border-radius:31px 27px 35px 25px; padding:28px; margin:16px 0; box-shadow:0 12px 30px rgba(151,102,79,.12); }

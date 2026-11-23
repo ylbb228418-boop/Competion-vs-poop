@@ -39,6 +39,7 @@ Then open http://localhost:3000 in a browser.
 - The signal meter blends smoothly from green through yellow to red, with stronger signals reaching farther toward red.
 - Added a tappable danger button that opens 911 information and three immediate safe steps.
 - Added a clearly marked, disconnected 911 demo button for the prototype.
+- Clicking the demo 911 button now shows “Sirens! Demo only.” with a small visual flash and makes no real call.
 - Verified the MVP end to end: a made-up report reaches the server, gets an AI summary, shows the result and signal meter, and remains saved in browser localStorage.
 - Incident logging now lets the user choose a date, sends that date with the AI report, and shows it in Saved patterns.
 - Warmed the incident date card so it matches the other cozy storybook choice cards.
